@@ -25,61 +25,44 @@ public class BinaryTree<T extends Comparable<T>> {
     public void traverseInOrder(Node<T> node) {
         if (node != null) {
             traverseInOrder(node.left);
-            System.out.print(node.key+ ",");
+            System.out.print(node.key + ",");
             traverseInOrder(node.right);
 
         }
     }
 
-    //To sort the tree in preOrder form
-    public void traversePreOrder(Node<T> node) {
-        if (node != null) {
-            System.out.print(node.key+ ",");
-            traversePreOrder(node.left);
-            traversePreOrder(node.right);
-        }
-    }
-
-    //To sort the tree post order
-    public void traversePostOrder(Node<T> node) {
-        if (node != null) {
-            traversePostOrder(node.left);
-            traversePostOrder(node.right);
-            System.out.print(node.key+ ",");
-        }
-    }
-
-    //To find the size
-    public int sizeFinding(Node<T> root) {
+    //Method findingNode to search for the element in the tree
+    public boolean findingNode(Node<T> root, T key) {
         if (root == null) {
-            return 0;
+            return false;
+        } else if (key.compareTo(root.key) == 0) {
+            return true;
         } else {
-            return sizeFinding(root.right) + 1 + sizeFinding(root.left);
+            if (key.compareTo(root.key) < 0) {
+                return findingNode(root.left, key);
+            } else {
+                return findingNode(root.right, key);
+            }
         }
     }
 
-    public int size() {
-        return sizeFinding(root);
+    public boolean searchNode(T key) {
+        System.out.println("Element to find is : " + key);
+        return findingNode(root, key);
     }
 
-    //Main method to print the tree
-    public static void main(String[] args) {
-        System.out.println("Welcome to Binary Search Tree Program");
+
+    //Main method to take input and print the true or falso for element found or not
+    public static void main(String args[]) {
         BinaryTree<Integer> binaryTree = new BinaryTree<>();
-        int[] elements = {56, 30, 70, 22, 40, 60, 63, 65, 95, 67, 3, 16, 11};
+        int[] elements = {56, 30, 70, 40, 22, 60, 95, 65, 63, 67, 11, 16, 3};
         for (Integer i : elements) {
             binaryTree.add(i);
         }
-        System.out.println("Size of the elements is : " + binaryTree.size());
-        System.out.println();
-        System.out.println("In order traversal is as follows : ");
+        System.out.println("Found data in the tree : " + binaryTree.searchNode(30));
+        System.out.println("Inorder traversal is as follows: ");
         binaryTree.traverseInOrder(root);
         System.out.println();
-        System.out.println("Pre order traversal is as follows : ");
-        binaryTree.traversePreOrder(root);
-        System.out.println();
-        System.out.println("Post order traversal is as follows : ");
-        binaryTree.traversePostOrder(root);
 
     }
 
