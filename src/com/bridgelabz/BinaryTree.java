@@ -25,7 +25,7 @@ public class BinaryTree<T extends Comparable<T>> {
     public void traverseInOrder(Node<T> node) {
         if (node != null) {
             traverseInOrder(node.left);
-            System.out.print(node.key);
+            System.out.print(node.key+ ",");
             traverseInOrder(node.right);
 
         }
@@ -34,7 +34,7 @@ public class BinaryTree<T extends Comparable<T>> {
     //To sort the tree in preOrder form
     public void traversePreOrder(Node<T> node) {
         if (node != null) {
-            System.out.print(node.key);
+            System.out.print(node.key+ ",");
             traversePreOrder(node.left);
             traversePreOrder(node.right);
         }
@@ -45,26 +45,41 @@ public class BinaryTree<T extends Comparable<T>> {
         if (node != null) {
             traversePostOrder(node.left);
             traversePostOrder(node.right);
-            System.out.print(node.key);
+            System.out.print(node.key+ ",");
         }
     }
 
+    //To find the size
+    public int sizeFinding(Node<T> root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return sizeFinding(root.right) + 1 + sizeFinding(root.left);
+        }
+    }
+
+    public int size() {
+        return sizeFinding(root);
+    }
 
     //Main method to print the tree
     public static void main(String[] args) {
         System.out.println("Welcome to Binary Search Tree Program");
-        BinaryTree<Integer> binarySearchTree = new BinaryTree<>();
-        binarySearchTree.add(56);
-        binarySearchTree.add(30);
-        binarySearchTree.add(70);
+        BinaryTree<Integer> binaryTree = new BinaryTree<>();
+        int[] elements = {56, 30, 70, 22, 40, 60, 63, 65, 95, 67, 3, 16, 11};
+        for (Integer i : elements) {
+            binaryTree.add(i);
+        }
+        System.out.println("Size of the elements is : " + binaryTree.size());
+        System.out.println();
         System.out.println("In order traversal is as follows : ");
-        binarySearchTree.traverseInOrder(root);
+        binaryTree.traverseInOrder(root);
         System.out.println();
         System.out.println("Pre order traversal is as follows : ");
-        binarySearchTree.traversePreOrder(root);
+        binaryTree.traversePreOrder(root);
         System.out.println();
         System.out.println("Post order traversal is as follows : ");
-        binarySearchTree.traversePostOrder(root);
+        binaryTree.traversePostOrder(root);
 
     }
 

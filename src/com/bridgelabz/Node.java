@@ -1,7 +1,6 @@
 package com.bridgelabz;
 
 public class Node<T extends Comparable<T>> {
-
     T key;
     Node<T> left;
     Node<T> right;
