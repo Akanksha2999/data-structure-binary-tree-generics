@@ -49,6 +49,7 @@ public class BinaryTree<T extends Comparable<T>> {
         }
     }
 
+
     //Main method to print the tree
     public static void main(String[] args) {
         System.out.println("Welcome to Binary Search Tree Program");
